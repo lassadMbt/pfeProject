@@ -1,13 +1,17 @@
 // lib/ui/LoginUi.dart
 
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:front/blocs/auth_bloc.dart';
 import 'package:front/blocs/auth_events.dart';
 import 'package:front/blocs/auth_state.dart';
+import 'package:front/components/square_tile.dart';
 import 'package:front/ui/SignUpUi.dart';
 
 class LoginUi extends StatelessWidget {
+  const LoginUi({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,16 +91,16 @@ class __UserLoginState extends State<_UserLoginState> {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
-          ),
-          primary: Colors.lightBlueAccent,
+          ), backgroundColor: Colors.lightBlueAccent,
         ),
         onPressed: () {
-          authBloc.add(LoginButtonPressed(email: email.text, password: password.text));
+          authBloc.add(
+              LoginButtonPressed(email: email.text, password: password.text));
         },
         child: const Text('Log In', style: TextStyle(color: Colors.white)),
       ),
     );
-     // Add this part for the sign-up link
+    // Add this part for the sign-up link
     final signUpLink = Padding(
       padding: const EdgeInsets.fromLTRB(65, 20, 0, 0),
       child: Row(
@@ -112,7 +116,9 @@ class __UserLoginState extends State<_UserLoginState> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SignUpPage()), // Navigate to SignUpPage
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const SignUpPage()), // Navigate to SignUpPage
               );
             },
             child: const Text(
@@ -125,6 +131,69 @@ class __UserLoginState extends State<_UserLoginState> {
           )
         ],
       ),
+    );
+    // or conttinu with
+    final continueWith = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.grey[400],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              'Or continue with',
+              style: TextStyle(color: Colors.grey[700]),
+            ),
+          ),
+          Expanded(
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.grey[400],
+            ),
+          ),
+        ],
+      ),
+    );
+    // google + apple sign in buttons
+    const Images = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        //google button
+        SquareTile(imagePath: 'lib/assets/google.png'),
+
+        SizedBox(
+          width: 25,
+        ),
+
+        // Apple button
+        SquareTile(
+          imagePath: 'lib/assets/apple.png',
+        )
+      ],
+    );
+
+    //not a member? register now
+
+    final RegisterNow = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Not a member?',
+          style: TextStyle(color: Colors.grey[700]),
+        ),
+        const SizedBox(
+          width: 4,
+        ),
+        const Text(
+          'Register now',
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+        )
+      ],
     );
 
     return Scaffold(
@@ -152,6 +221,12 @@ class __UserLoginState extends State<_UserLoginState> {
               const SizedBox(height: 48.0),
               loginButton,
               signUpLink, // Add the sign-up link here
+              const SizedBox(height: 48.0),
+              continueWith,
+              const SizedBox(height: 48.0),
+              Images,
+              const SizedBox(height: 48.0),
+              RegisterNow,
             ],
           ),
         ),
@@ -159,4 +234,3 @@ class __UserLoginState extends State<_UserLoginState> {
     );
   }
 }
-

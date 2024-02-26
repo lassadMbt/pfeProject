@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 class AuthEvents extends Equatable{
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
@@ -12,6 +11,7 @@ class StartEvent extends AuthEvents{}
 class LoginButtonPressed extends AuthEvents{
   final String email;
   final String password;
+
   LoginButtonPressed({required this.email, required this.password});
    @override
   List<Object?> get props => [email, password];
@@ -23,6 +23,7 @@ class SignUpButtonPressed extends AuthEvents {
   final String email;
   final String password;
   final int type;
+  
   SignUpButtonPressed(
       {required this.name,
       required this.email,
@@ -32,3 +33,4 @@ class SignUpButtonPressed extends AuthEvents {
   @override
   List<Object?> get props => [name, email, password, type];
 }
+

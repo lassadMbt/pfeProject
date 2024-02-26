@@ -1,12 +1,23 @@
+// lib/ui/SignUpUi.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:front/blocs/auth_bloc.dart';
 import 'package:front/blocs/auth_events.dart';
 import 'package:front/blocs/auth_state.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nameController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -62,8 +73,7 @@ class SignUpPage extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
-          ),
-          primary: Colors.lightBlueAccent,
+          ), backgroundColor: Colors.lightBlueAccent,
         ),
         onPressed: () {
           String name = nameController.text;
@@ -97,13 +107,13 @@ class SignUpPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             logo,
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             username,
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             email,
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             pass,
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             signUpButton,
           ],
         ),
@@ -111,3 +121,4 @@ class SignUpPage extends StatelessWidget {
     );
   }
 }
+

@@ -13,20 +13,23 @@ void main() => runApp(Auth());
 
 class Auth extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthBloc(LoginInitState(), AuthRepository()),),
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(LoginInitState(), AuthRepository()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
-        routes : {
-          '/' : (context) => LoginUi(),
-          '/contacts' : (context) => Contact(),
-          '/AddContacts' : (context) => AddContacts(),
+        routes: {
+          '/': (context) => const LoginUi(),
+          '/contacts': (context) => Contact(),
+          '/AddContacts': (context) => AddContacts(),
         },
       ),
     );
   }
 }
+
